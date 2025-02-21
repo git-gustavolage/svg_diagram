@@ -5,11 +5,13 @@ import { Grid } from '../core/Grid';
 import DraggableRectComponent from './DraggableRectComponent';
 import Container from '../core/Container';
 import { DraggableRect } from '../core/DraggableRect';
+import Line from '../core/Line';
+import Point from '../core/Point';
 
 const DiagramPanel: React.FC = () => {
   const width = 800;
   const height = 600;
-  const gridSize = 20;
+  const gridSize = 10;
 
   const viewport = new Viewport(1, 0, 0);
   const grid = new Grid(gridSize);
@@ -17,11 +19,10 @@ const DiagramPanel: React.FC = () => {
 
   container.append(new DraggableRect('1', 100, 100, 100, 100, gridSize));
   container.append(new DraggableRect('2', 300, 100, 100, 100, gridSize));
-  container.append(new DraggableRect('3', 500, 100, 100, 100, gridSize));
+  container.append(new DraggableRect('3', 500, 100, 400, 100, gridSize));
 
-  console.log(container.getElements());
-  
-
+  const line = new Line(new Point(300, 100), new Point(300, 200));
+  console.log(line);
 
 
   const verticalLines = grid.getVerticalLines(width);
@@ -55,6 +56,17 @@ const DiagramPanel: React.FC = () => {
                 strokeWidth={1}
               />
             ))}
+          </g>
+
+          <g className='line'>
+            <line
+              x1={line.start.x}
+              x2={line.end.x}
+              y1={line.start.y}
+              y2={line.end.y}
+              stroke="red"
+              strokeWidth={2}
+            />
           </g>
 
           <g className="container">

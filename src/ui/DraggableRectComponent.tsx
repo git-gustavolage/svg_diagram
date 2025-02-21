@@ -71,7 +71,7 @@ const DraggableRectComponent: React.FC<DraggableRectComponentProps> = ({
     }
   }, [isDragging, dragOffset, draggableRect, gridSize]);
 
-  return (
+  return (<>
     <rect
       x={draggableRect.x}
       y={draggableRect.y}
@@ -83,6 +83,8 @@ const DraggableRectComponent: React.FC<DraggableRectComponentProps> = ({
       onMouseDown={handleMouseDown}
       style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
     />
+    <text id='Texto' style={{ userSelect: "none"}} fontSize={12} x={draggableRect.middlePoint().x - 27.5} y={draggableRect.middlePoint().y}>({draggableRect.middlePoint().x}) ({draggableRect.middlePoint().y})</text>
+  </>
   );
 };
 
