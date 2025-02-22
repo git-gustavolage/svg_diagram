@@ -1,12 +1,14 @@
-// src/App.tsx
-import DiagramPanel from './ui/DiagramPanel';
+import React from "react";
 
-function App() {
+import { ViewportContainer } from "./view/ViewportContainer";
+
+const App: React.FC = () => {
+
   return (
-    <div className="min-h-screen bg-gray-200 flex items-center justify-center">
-      <DiagramPanel />
+    <div className="w-full h-dvh flex items-center justify-center">
+      <ViewportContainer />
     </div>
   );
-}
+};
 
 export default App;

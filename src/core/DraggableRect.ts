@@ -25,4 +25,8 @@ export class DraggableRect {
   public middlePoint(): Point {
     return new Point(this.x + this.width / 2, this.y + this.height / 2);
   }
+
+  public getPosition(): {x: number, y: number}{
+    return {x: this.x, y: this.y};
+  }
 }
