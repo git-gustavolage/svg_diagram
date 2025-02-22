@@ -1,57 +1,47 @@
-import React, { useState } from "react";
-import { Line as LineDomain } from "../core/Line";
+import React, { useEffect, useState } from "react";
+import { Line } from "../core/Line";
 
 interface LineProps {
-  line: LineDomain;
+  line: Line;
 }
 
 export const LineSvg: React.FC<LineProps> = ({ line }) => {
-  const [segments, setSegments] = useState(() => [line]);
+  const [hasDivied, setHasDivided] = useState(false);
+  const [segments, setSegments] = useState<Line[]>(() => [line]);
+
+  var [left, right] = line.divide()
+  left.anchorIn(line.start, left.end);
+  right.anchorIn(left.end, right.end);
+
+  useEffect(() => {
+
+    if (hasDivied) {
+      
+      setSegments([left, right]);
+    }
+    console.log("has divided");
+  }, [hasDivied]);
 
   const divide = () => {
-    var [left, right] = line.divide()
-    left.anchorIn(left.start, right.start);
-    right.anchorIn(right.start, right.end)
-    setSegments([left, right]);
+    setHasDivided(true);
   }
 
   return (
     <g>
-      {segments.map((s, index) => (
-        <g key={index}>
-          <line
-            x1={s.start.x}
-            y1={s.start.y}
-            x2={s.end.x}
-            y2={s.end.y}
-            stroke="black"
-            onDoubleClick={divide}
-            strokeWidth={2}
-            className="p-4"
-          />
-          <circle
-            cx={s.start.x}
-            cy={s.start.y}
-            r={5}
-            fill="red"
-          />
-          <circle
-            cx={s.end.x}
-            cy={s.end.y}
-            r={5}
-            fill="red"
-          />
-        </g>
-      ))}
-
-      {/* <line
-      x1={start.x}
-      y1={start.y}
-      x2={end.x}
-      y2={end.y}
-      stroke="black"
-      strokeWidth={2}
-      /> */}
+      {segments.map((line, index) => {
+        return (
+          <g key={index}>
+            <line
+              x1={line.start.x}
+              y1={line.start.y}
+              x2={line.end.x}
+              y2={line.end.y}
+              stroke="rgb(50, 50, 50, 0.5)"
+              onDoubleClick={divide}
+              strokeWidth={2}
+            />
+          </g>)
+      })}
     </g>
   );
 };

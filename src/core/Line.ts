@@ -1,5 +1,4 @@
 import Point from "./Point";
-import { Rect } from "./Rect";
 
 export class Line{
     start: Point;
@@ -41,12 +40,12 @@ export class Line{
         return Math.abs(this.start.x - this.end.x);
     }
 
-    divide(){
-        const left_start = new Point(this.start.x, this.start.y);
-        const right_end = new Point(this.end.x, this.end.y);
-        const meio = new Point((this.start.x + this.end.x) / 2, (this.start.y + this.end.y) / 2);
+    getMiddlePoint(): Point{
+        return new Point((this.start.x + this.end.x) / 2, (this.start.y + this.end.y) / 2);
+    }
 
-        return [new Line(left_start, meio), new Line(meio, right_end)];
+    divide(){
+        return [new Line(this.start, this.getMiddlePoint()), new Line(this.getMiddlePoint(), this.end)];
     }
 
 }

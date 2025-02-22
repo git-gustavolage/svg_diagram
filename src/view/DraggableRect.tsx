@@ -1,12 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Rect as RectDomain } from "../core/Rect";
+import { Viewport } from "../core/Viewport";
 
 interface DraggableRectProps {
   rect: RectDomain;
+  viewport: Viewport;
   onUpdate: () => void;
 }
 
-export const DraggableRect: React.FC<DraggableRectProps> = ({ rect, onUpdate }) => {
+export const DraggableRect: React.FC<DraggableRectProps> = ({ rect, viewport, onUpdate }) => {
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const rectRef = useRef<SVGRectElement>(null);
@@ -18,8 +20,9 @@ export const DraggableRect: React.FC<DraggableRectProps> = ({ rect, onUpdate }) 
   
   const onMouseMove = (e: MouseEvent) => {
     if (!dragging) return;
-    const newX = e.clientX - offset.x;
-    const newY = e.clientY - offset.y;
+    const factor = 1 / viewport.scale;
+    const newX = (e.clientX - offset.x) * factor;
+    const newY = (e.clientY - offset.y) * factor;
     rect.setPosition(newX, newY);
     onUpdate();
   };

@@ -17,6 +17,11 @@ export class Viewport {
     public getTransform(): string {
       return `translate(${this.offsetX}, ${this.offsetY}) scale(${this.scale})`;
     }
+
+    setOffset(offsetX: number, offsetY: number) {
+      this.offsetX = offsetX;
+      this.offsetY = offsetY;
+    }
   
     // Métodos para panning e zoom podem ser adicionados conforme necessário:
     public pan(dx: number, dy: number): void {
