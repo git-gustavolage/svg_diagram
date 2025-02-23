@@ -22,7 +22,7 @@ export const GridView: React.FC<GridPops> = ({ gridSize, width, height }) => {
           y1={0}
           x2={x}
           y2={height}
-          stroke="#e5e7eb"
+          stroke="rgb(25, 25, 25, 0.3)"
           strokeWidth={1}
         />
       ))}
@@ -33,7 +33,7 @@ export const GridView: React.FC<GridPops> = ({ gridSize, width, height }) => {
           y1={y}
           x2={width}
           y2={y}
-          stroke="#e5e7eb"
+          stroke="rgb(25, 25, 25, 0.3)"
           strokeWidth={1}
         />
       ))}

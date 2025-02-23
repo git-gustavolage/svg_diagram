@@ -40,6 +40,22 @@ export const LineSvg: React.FC<LineProps> = ({ line }) => {
               onDoubleClick={divide}
               strokeWidth={2}
             />
+            {/* <circle
+              cx={line.start.x}
+              cy={line.start.y}
+              r={5}
+              stroke="rgb(50, 50, 50, 0.5)"
+              strokeWidth={2}
+              fill="rgb(50, 50, 50, 0.5)"
+            />
+            <circle
+              cx={line.end.x}
+              cy={line.end.y}
+              r={5}
+              stroke="rgb(50, 50, 50, 0.5)"
+              strokeWidth={2}
+              fill="rgb(50, 50, 50, 0.5)"
+            /> */}
           </g>)
       })}
     </g>

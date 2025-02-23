@@ -1,28 +1,25 @@
-import { useRef, useState, useEffect } from "react";
-import { Rect as RectDomain } from "../core/Rect";
-import { Viewport } from "../core/Viewport";
+import { useEffect, useState } from "react";
+import { Polygon } from "../core/Polygon"
 
-interface DraggableRectProps {
-  rect: RectDomain;
-  viewport: Viewport;
-  onUpdate: () => void;
+interface PolyhonPops {
+  polygon: Polygon,
+  onUpdate: () => void
 }
 
-export const DraggableRect: React.FC<DraggableRectProps> = ({ rect, viewport, onUpdate }) => {
+export const PolygonSvg: React.FC<PolyhonPops> = ({ polygon, onUpdate }) => {
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const rectRef = useRef<SVGRectElement>(null);
 
   const onMouseDown = (e: React.MouseEvent) => {
     setDragging(true);
-    setOffset({ x: e.clientX - rect.x, y: e.clientY - rect.y });
+    setOffset({ x: e.clientX - polygon.x, y: e.clientY - polygon.y });
   };
 
   const onMouseMove = (e: MouseEvent) => {
     if (!dragging) return;
     const newX = (e.clientX - offset.x);
     const newY = (e.clientY - offset.y);
-    rect.setPosition(newX, newY);
+    polygon.setPosition(newX, newY);
     onUpdate();
   };
 
@@ -45,17 +42,17 @@ export const DraggableRect: React.FC<DraggableRectProps> = ({ rect, viewport, on
   }, [dragging, offset]);
 
   return (
-    <rect
-      ref={rectRef}
-      x={rect.x}
-      y={rect.y}
-      width={rect.width}
-      height={rect.height}
-      fill="white"
-      stroke="black"
-      strokeWidth={2}
-      onMouseDown={onMouseDown}
-      style={{ cursor: "move" }}
-    />
-  );
-};
+    <g>
+      <polygon
+        width={polygon.width}
+        height={polygon.height}
+        fill="white"
+        stroke="black"
+        strokeWidth="2"
+        points={polygon.getPoints().map(p => `${p.x},${p.y}`).join(" ")}
+        onMouseDown={onMouseDown}
+      />
+    </g>
+  )
+
+}
