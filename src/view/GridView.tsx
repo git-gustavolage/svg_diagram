@@ -6,6 +6,7 @@ interface GridPops {
   height: number
 }
 
+// TODO: preencher a viewport inteira, quando alterado o zomm e tal
 export const GridView: React.FC<GridPops> = ({ gridSize, width, height }) => {
 
   const grid = new GridCore(gridSize);

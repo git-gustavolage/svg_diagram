@@ -15,5 +15,4 @@ export default class Point {
     getPosition(): Point {
         return this;
     }
-
 }

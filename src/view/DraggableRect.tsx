@@ -25,6 +25,7 @@ export const DraggableRect: React.FC<DraggableRectProps> = ({ rect, viewport, on
   };
 
   const onMouseMove = (e: MouseEvent) => {
+    //TODO: arrumar a movimento e o resize com base na escala da viewport
     if (!dragging) return;
     const newX = (e.clientX - offset.x);
     const newY = (e.clientY - offset.y);
@@ -63,12 +64,14 @@ export const DraggableRect: React.FC<DraggableRectProps> = ({ rect, viewport, on
   }, [dragging, offset]);
 
   const handleResize = (point: Point) => {
+    //TODO: adicionar mais pontos de redimensionamento, acho que um elemento pra cada direção, com sua própria lógica vai ser a melhor solução
     const newWidth = Math.abs(point.x - rect.x);
     const newHeight = Math.abs(point.y - rect.y);
     rect.resize(newWidth, newHeight);
   }
 
 
+  //TODO: adicionar mais opções de UI
   return (
     <g>
       <rect
@@ -86,6 +89,7 @@ export const DraggableRect: React.FC<DraggableRectProps> = ({ rect, viewport, on
 
       <TextSvg text={text} element={rect} />
       {showOptions && <PointSvg point={rect.getPoints()[2]} handleResize={handleResize} onUpdate={onUpdate} />}
+    
     </g>
   );
 };

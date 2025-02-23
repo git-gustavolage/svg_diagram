@@ -8,6 +8,8 @@ import { LineSvg } from "./LineSvg";
 import { PolygonSvg } from "./PolygonSvg";
 import { Polygon } from "../core/Polygon";
 
+//TODO: criar ui para adicionar os elemntos na view
+//TODO: ver uma forma de diminuir o tanto de re-render => talvez usar mais ref ao invés de state
 export const ViewportContainer: React.FC = () => {
   const width = 1200;
   const height = 750;
@@ -18,8 +20,8 @@ export const ViewportContainer: React.FC = () => {
   const [, setTick] = useState(0);
   const onUpdate = () => setTick(t => t + 1);
 
+  //olha q nojo esse monte de state🤮🤮
   const [viewport] = useState(() => new Viewport(1, 0, 0, width, height));
-
   const [rect1] = useState(() => new Rect(300, 100, 200, 100, gridSize));
   const [rect2] = useState(() => new Rect(50, 250, 200, 100, gridSize));
   const [polygon1] = useState(() => new Polygon(300, 300, 300, 100, gridSize));
@@ -67,14 +69,13 @@ export const ViewportContainer: React.FC = () => {
     return () => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
-
     };
   }, [dragging]);
 
+  //pprt que precisava de uma funcao para isso?
   const handleContextMenu = (event: React.MouseEvent) => {
     event.preventDefault();
   };
-
 
   return (
     <div className="w-full h-full bg-gray-200 flex justify-center items-center">

@@ -1,5 +1,6 @@
 import Point from "./Point";
 
+//TODO: permitir redimensionamento
 export class Polygon {
     public x: number;
     public y: number;

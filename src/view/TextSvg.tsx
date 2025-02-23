@@ -1,13 +1,13 @@
 import { useRef } from "react";
 import { DraggableElement } from "../core/DraggableElemet";
 
-
 interface TextProps {
   text: string;
   element: DraggableElement
 }
 
 export const TextSvg: React.FC<TextProps> = ({ text, element }) => {
+  //TODO: uma forma de centralizar o texto ao renderizar pela primeira vez
   const textRef = useRef<SVGTextElement>(null);
   const width = textRef.current?.getBBox().width
   

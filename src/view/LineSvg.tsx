@@ -5,6 +5,12 @@ interface LineProps {
   line: Line;
 }
 
+//TODO: arrumar a forma que a linha se divide para permitir a ancoragem nos elementos
+//TODO: implemtar dragging
+//TODO: implementar a divisão
+//TODO: implementar cardinalidade
+//TODO: implementar redimensionamento (arrastando os pontos das extremidades)
+//TODO: implementar ancoragem dinamica
 export const LineSvg: React.FC<LineProps> = ({ line }) => {
   const [hasDivied, setHasDivided] = useState(false);
   const [segments, setSegments] = useState<Line[]>(() => [line]);

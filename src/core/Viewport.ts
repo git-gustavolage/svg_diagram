@@ -1,4 +1,8 @@
-// src/core/Viewport.ts
+
+
+
+//TODO: permitir que dimencionamento dinamico com base no zoom
+//TODO: set do nivel do zomm (max e min)
 export class Viewport {
     public scale: number;
     public offsetX: number;
@@ -21,12 +25,6 @@ export class Viewport {
     setOffset(offsetX: number, offsetY: number) {
       this.offsetX = offsetX;
       this.offsetY = offsetY;
-    }
-  
-    // Métodos para panning e zoom podem ser adicionados conforme necessário:
-    public pan(dx: number, dy: number): void {
-      this.offsetX += dx;
-      this.offsetY += dy;
     }
   
     public zoom(factor: number): void {

@@ -1,7 +1,7 @@
 import { DraggableElement } from "./DraggableElemet";
 import Point from "./Point";
 
-
+//??? talvez dentro dessas classes puras definir mais coisas como cor, opacidade, borda, etc ?????
 export class Rect extends DraggableElement {
 
   constructor(x: number, y: number, width: number, height: number, gridSize: number) {
