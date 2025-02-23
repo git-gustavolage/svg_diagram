@@ -1,12 +1,11 @@
-import { DraggableRect } from "./DraggableRect";
+import Point from "./Point";
 
-export default class Container {
+export class DraggableElement {
     public x: number;
     public y: number;
     public width: number;
     public height: number;
     public gridSize: number;
-    public elements: Map<{x: number, y:number}, DraggableRect>;
 
     constructor(x: number, y: number, width: number, height: number, gridSize: number) {
         this.x = x;
@@ -14,14 +13,15 @@ export default class Container {
         this.width = width;
         this.height = height;
         this.gridSize = gridSize;
-        this.elements = new Map();
     }
 
-    append(element: DraggableRect) {
-        this.elements.set({x: element.x, y: element.y}, element);
+    public getCenter(): Point {
+        return new Point(this.x + (this.width / 2), this.y + (this.height / 2));
     }
 
-    getElements() {
-        return Array.from(this.elements.values());
+    public setPosition(newX: number, newY: number) {
+        this.x = Math.round(newX / this.gridSize) * this.gridSize;
+        this.y = Math.round(newY / this.gridSize) * this.gridSize;
     }
+
 }

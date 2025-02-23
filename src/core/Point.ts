@@ -7,5 +7,13 @@ export default class Point {
         this.y = y;
     }
 
+    setPosition(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+    }
+
+    getPosition(): Point {
+        return this;
+    }
 
 }

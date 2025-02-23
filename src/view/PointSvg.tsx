@@ -1,25 +1,28 @@
-import { useEffect, useState } from "react";
-import { Polygon } from "../core/Polygon"
+import { useEffect, useRef, useState } from "react";
+import Point from "../core/Point"
 
-interface PolyhonPops {
-  polygon: Polygon,
-  onUpdate: () => void
+interface PointProps {
+  point: Point;
+  onUpdate: () => void;
+  handleResize: (point: Point) => void;
 }
 
-export const PolygonSvg: React.FC<PolyhonPops> = ({ polygon, onUpdate }) => {
+export const PointSvg: React.FC<PointProps> = ({ point, handleResize, onUpdate }) => {
   const [dragging, setDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const elementRef = useRef<SVGCircleElement>(null);
 
   const onMouseDown = (e: React.MouseEvent) => {
     setDragging(true);
-    setOffset({ x: e.clientX - polygon.x, y: e.clientY - polygon.y });
+    setOffset({ x: e.clientX - point.x, y: e.clientY - point.y });
   };
 
   const onMouseMove = (e: MouseEvent) => {
     if (!dragging) return;
     const newX = (e.clientX - offset.x);
     const newY = (e.clientY - offset.y);
-    polygon.setPosition(newX, newY);
+    point.setPosition(newX, newY);
+    handleResize(point.getPosition());
     onUpdate();
   };
 
@@ -42,17 +45,16 @@ export const PolygonSvg: React.FC<PolyhonPops> = ({ polygon, onUpdate }) => {
   }, [dragging, offset]);
 
   return (
-    <g>
-      <polygon
-        width={polygon.width}
-        height={polygon.height}
-        fill="transparent"
-        stroke="black"
-        strokeWidth="2"
-        points={polygon.getPoints().map(p => `${p.x},${p.y}`).join(" ")}
-        onMouseDown={onMouseDown}
-      />
-    </g>
+    <circle
+      ref={elementRef}
+      cx={point.x}
+      cy={point.y}
+      r={5}
+      fill="rgb(50, 50, 50, 0.5)"
+      strokeWidth={2}
+      stroke="rgb(50, 50, 50, 0.5)"
+      onMouseDown={onMouseDown}
+      style={{ cursor: "nw-resize" }}
+    />
   )
-
 }

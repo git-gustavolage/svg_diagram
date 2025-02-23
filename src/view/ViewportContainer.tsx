@@ -20,17 +20,14 @@ export const ViewportContainer: React.FC = () => {
 
   const [viewport] = useState(() => new Viewport(1, 0, 0, width, height));
 
-  const [rect1] = useState(() => new Rect(300, 100, 250, 100, gridSize));
-  const [rect2] = useState(() => new Rect(50, 250, 250, 100, gridSize));
+  const [rect1] = useState(() => new Rect(300, 100, 200, 100, gridSize));
+  const [rect2] = useState(() => new Rect(50, 250, 200, 100, gridSize));
   const [polygon1] = useState(() => new Polygon(300, 300, 300, 100, gridSize));
   const [line1] = useState(() => new Line(rect1.getCenter(), polygon1.getCenter()));
   const [line2] = useState(() => new Line(polygon1.getCenter(), rect2.getCenter()));
-  const [line3] = useState(() => new Line(rect1.getCenter(), rect2.getCenter()));
 
   line1.anchorIn(rect1.getCenter(), polygon1.getCenter());
   line2.anchorIn(polygon1.getCenter(), rect2.getCenter());
-  line3.anchorIn(rect1.getCenter(), rect2.getCenter());
-
 
   const onMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -101,9 +98,8 @@ export const ViewportContainer: React.FC = () => {
           <g id="container">
             <LineSvg line={line1} />
             <LineSvg line={line2} />
-            <LineSvg line={line3} />
+            <DraggableRect rect={rect2} onUpdate={onUpdate} viewport={viewport} text="Cachoroo" />
             <DraggableRect rect={rect1} onUpdate={onUpdate} viewport={viewport} />
-            <DraggableRect rect={rect2} onUpdate={onUpdate} viewport={viewport} />
             <PolygonSvg polygon={polygon1} onUpdate={onUpdate} />
           </g>
         </g>

@@ -14,7 +14,7 @@ export const GridView: React.FC<GridPops> = ({ gridSize, width, height }) => {
   const verticalLines = grid.getVerticalLines(width);
 
   return (
-    <g className="grid-lines">
+    <g className="grid">
       {verticalLines.map((x, index) => (
         <line
           key={`v-${index}`}
